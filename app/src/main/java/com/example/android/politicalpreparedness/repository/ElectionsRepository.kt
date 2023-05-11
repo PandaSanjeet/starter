@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.android.politicalpreparedness.database.ElectionDatabase
+import com.example.android.politicalpreparedness.database.UpcomingElections
 import com.example.android.politicalpreparedness.database.asDomainModel
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.asDatabaseModel
@@ -14,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 class ElectionsRepository(private val database: ElectionDatabase) {
 
-    val allUpcomingElections: LiveData<List<Election>> = Transformations.map(database.electionDao.getAllElections()){
+    val allUpcomingElections: LiveData<List<UpcomingElections>> = Transformations.map(database.electionDao.getAllElections()){
         it?.asDomainModel()
     }
 

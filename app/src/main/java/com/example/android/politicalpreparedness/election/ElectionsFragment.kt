@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
+import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 
 class ElectionsFragment: Fragment() {
 
@@ -31,8 +33,14 @@ class ElectionsFragment: Fragment() {
         //TODO: Link elections to voter info
 
         //TODO: Initiate recycler adapters
+        binding.upcomingElectionsRecyclerview.adapter = ElectionListAdapter()
 
         //TODO: Populate recycler adapters
+        viewModel.upcomingElections.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                ElectionListAdapter().data = it
+            }
+        })
 
         return binding.root
     }

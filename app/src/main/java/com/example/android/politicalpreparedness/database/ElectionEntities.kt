@@ -23,7 +23,7 @@ data class UpcomingElections(
     @PrimaryKey val id: Long,
     @ColumnInfo(name = "name")val name: String,
     @ColumnInfo(name = "electionDay")val electionDay: String,
-    @Embedded(prefix = "division_") @Json(name="ocdDivisionId") val division: String
+    @Json(name="ocdDivisionId") val division: String
     //@Embedded(prefix = "division_") @Json(name="ocdDivisionId") val division: Division
 )/*{constructor() : this(0,"","","") }*/
 
@@ -33,9 +33,9 @@ data class SavedElections(
     val id: Long = 0L
 )*/
 
-fun List<UpcomingElections>.asDomainModel(): List<Election>{
+fun List<UpcomingElections>.asDomainModel(): List<UpcomingElections>{
     return map {
-        Election(
+        UpcomingElections(
             id = it.id,
             name = it.name,
             electionDay = it.electionDay,

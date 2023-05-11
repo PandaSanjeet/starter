@@ -9,6 +9,7 @@ import java.util.*
 data class NetworkElectionContainer(val kind: String, val elections: List<NetworkElection>)
 
 data class NetworkElection(val id: Long, val name: String, val electionDay: String, @Json(name = "ocdDivisionId") val division: String)
+//data class NetworkElection(val id: Long, val name: String, val electionDay: String, @Json(name = "ocdDivisionId") val division: Division)
 
 data class NetworkDivision(val id: String, val country: String, val state: String)
 

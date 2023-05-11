@@ -10,6 +10,6 @@ class VoterInfoViewModelFactory: ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             return VoterInfoViewModel() as T
         }
-        throw IllegalArgumentException("Unable to construct viewmodel")
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
