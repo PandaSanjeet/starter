@@ -9,7 +9,7 @@ import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBi
 
 class VoterInfoFragment : Fragment() {
 
-    val args = VoterInfoFragmentArgs.fromBundle(requireArguments())
+    val args = VoterInfoFragmentArgs.fromBundle(requireArguments()).argElectionId
 
     //TODO: Add ViewModel values and create ViewModel
     /*private val viewModel:VoterInfoViewModel by lazy {
