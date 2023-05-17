@@ -8,10 +8,15 @@
             name="upcomingElectionData"
             type="com.example.android.politicalpreparedness.network.models.Election" />
 
+        <variable
+            name="itemClickListener"
+            type="com.example.android.politicalpreparedness.election.adapter.UpcomingElectionItemClickListener" />
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> itemClickListener.onClick(upcomingElectionData)}">
 
         <TextView
             android:layout_width="match_parent"
@@ -19,8 +24,8 @@
             android:id="@+id/title"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:layout_margin="10dp"
-            android:text="@{upcomingElectionData.name}"
+            android:layout_margin="5dp"
+            app:itemTitleData="@{upcomingElectionData}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/date"
-            android:layout_margin="10dp"
-            android:text="@{upcomingElectionData.electionDay}"
+            android:layout_marginLeft="5dp"
+            app:itemDateData="@{upcomingElectionData}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

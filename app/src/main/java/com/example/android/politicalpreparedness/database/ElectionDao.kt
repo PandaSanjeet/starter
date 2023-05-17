@@ -11,13 +11,17 @@ import com.example.android.politicalpreparedness.network.models.Election
 @Dao
 interface ElectionDao {
 
-    //Added insert query
+    //Added insert query for upcoming elections
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllElections(vararg elections: UpcomingElections)
 
     //Added select all election query
     @Query("SELECT * FROM election_table")
     fun getAllElections(): LiveData<List<UpcomingElections>>
+
+    //Added insert query for saved elections
+    /*@Insert(onConflict = OnConflictStrategy.REPLACE) // Add properly
+    suspend fun insertSavedElections(vararg elections: UpcomingElections)*/
 
     //Added select single election query
     /*@Query("SELECT * FROM election_table INNER JOIN saved_elections ON election_table.id = saved_elections.id")

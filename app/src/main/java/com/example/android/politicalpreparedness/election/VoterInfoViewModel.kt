@@ -1,10 +1,26 @@
 package com.example.android.politicalpreparedness.election
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.politicalpreparedness.database.ElectionDao
+import com.example.android.politicalpreparedness.database.ElectionDatabase
+import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.repository.ElectionsRepository
+import kotlinx.coroutines.launch
 
-class VoterInfoViewModel : ViewModel() { // Delete this line
+class VoterInfoViewModel(val id: Election, application: Application) : AndroidViewModel(application) { // Delete this line
 //class VoterInfoViewModel(private val dataSource: ElectionDao) : ViewModel() { // Original
+
+    private val database = ElectionDatabase.getInstance(application)
+    private val electionsRepository = ElectionsRepository(database)
+
+    init {
+        viewModelScope.launch {
+            electionsRepository.voterInfo(2000,"1263%20Pacific%20Ave.%20Kansas%20City%20KS")
+        }
+    }
 
     //TODO: Add live data to hold voter info
 

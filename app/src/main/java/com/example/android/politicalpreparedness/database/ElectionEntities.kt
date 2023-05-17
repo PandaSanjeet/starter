@@ -33,9 +33,9 @@ data class SavedElections(
     val id: Long = 0L
 )*/
 
-fun List<UpcomingElections>.asDomainModel(): List<UpcomingElections>{
+fun List<UpcomingElections>.asDomainModel(): List<Election>{
     return map {
-        UpcomingElections(
+        Election(
             id = it.id,
             name = it.name,
             electionDay = it.electionDay,

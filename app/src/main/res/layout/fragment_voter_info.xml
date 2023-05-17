@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_padding"
+            android:paddingLeft="8dp"
             app:layout_constraintTop_toBottomOf="@id/election_name"
             tools:text="12 November 2055" />
 
@@ -33,6 +34,11 @@
             android:id="@+id/state_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:text="Election Information"
             app:layout_constraintTop_toBottomOf="@id/election_date"
             app:layout_constraintStart_toStartOf="@id/election_date" />
 
@@ -42,6 +48,9 @@
             android:id="@+id/state_locations"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/voting_locations"
+            android:clickable="true"
+            android:paddingLeft="8dp"
             app:layout_constraintTop_toBottomOf="@id/state_header"
             app:layout_constraintStart_toStartOf="@id/election_date" />
 
@@ -51,16 +60,19 @@
             android:id="@+id/state_ballot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:text="@string/ballot_information"
+            android:clickable="true"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             app:layout_constraintStart_toStartOf="@id/election_date" />
 
-        <androidx.constraintlayout.widget.Group
+        <!--<androidx.constraintlayout.widget.Group
             android:id="@+id/address_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:constraint_referenced_ids="state_correspondence_header,address" />
 
-        <!-- TODO: Add visual styling and content -->
+        &lt;!&ndash; TODO: Add visual styling and content &ndash;&gt;
         <TextView
             android:id="@+id/state_correspondence_header"
             android:layout_width="wrap_content"
@@ -68,15 +80,28 @@
             app:layout_constraintTop_toBottomOf="@id/state_ballot"
             app:layout_constraintStart_toStartOf="@id/election_date" />
 
-        <!-- TODO: Add data binding -->
+        &lt;!&ndash; TODO: Add data binding &ndash;&gt;
         <TextView
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
-            app:layout_constraintStart_toStartOf="@id/election_date" />
+            app:layout_constraintStart_toStartOf="@id/election_date" />-->
 
-        <!-- TODO: Add button to save election to Room -->
+        <!-- Added button to save election to Room -->
+        <Button
+            android:id="@+id/save_election"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="@string/follow_election"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

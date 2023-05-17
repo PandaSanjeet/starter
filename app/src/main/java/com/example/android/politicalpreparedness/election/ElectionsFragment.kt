@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
+import com.example.android.politicalpreparedness.election.adapter.UpcomingElectionItemClickListener
 
 class ElectionsFragment: Fragment() {
+
 
     //Declare ViewModel
     private val viewModel:ElectionsViewModel by lazy {
@@ -19,6 +23,12 @@ class ElectionsFragment: Fragment() {
         }
         ViewModelProvider(this,ElectionsViewModelFactory(activity.application)).get(ElectionsViewModel::class.java)
     }
+
+    //Initiate recycler adapters
+    val adapter = ElectionListAdapter(UpcomingElectionItemClickListener {
+        //Toast.makeText(context,"${it}",Toast.LENGTH_SHORT).show()
+        viewModel.onUpcomingElectionsItemClicked(it)
+    })
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -30,21 +40,26 @@ class ElectionsFragment: Fragment() {
         val binding = FragmentElectionBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.electionViewModel = viewModel
-        //TODO: Link elections to voter info
 
-        //TODO: Initiate recycler adapters
-        binding.upcomingElectionsRecyclerview.adapter = ElectionListAdapter()
+        //Linked elections to voter info
+        viewModel.navigateToSelectedUpcomingElection.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(2000))
+                viewModel.onUpcomingElectionsItemNavigated()
+            }
+        })
 
-        //TODO: Populate recycler adapters
+        //Populate recycler adapters
+        binding.upcomingElectionsRecyclerview.adapter = adapter
+
+        //Refresh adapters when fragment loads
         viewModel.upcomingElections.observe(viewLifecycleOwner, Observer {
             it?.let {
-                ElectionListAdapter().data = it
+                adapter.submitList(it)
             }
         })
 
         return binding.root
     }
-
-    //TODO: Refresh adapters when fragment loads
 
 }

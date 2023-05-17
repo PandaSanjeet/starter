@@ -9,13 +9,14 @@ import com.example.android.politicalpreparedness.database.asDomainModel
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.asDatabaseModel
 import com.example.android.politicalpreparedness.network.models.Election
+import com.example.android.politicalpreparedness.network.models.VoterInfoResponse
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ElectionsRepository(private val database: ElectionDatabase) {
 
-    val allUpcomingElections: LiveData<List<UpcomingElections>> = Transformations.map(database.electionDao.getAllElections()){
+    val allUpcomingElections: LiveData<List<Election>> = Transformations.map(database.electionDao.getAllElections()){
         it?.asDomainModel()
     }
 
@@ -38,5 +39,14 @@ class ElectionsRepository(private val database: ElectionDatabase) {
                 Log.d("ExceptionInRepo ",e.toString())
             }*/
         }
+    }
+
+    suspend fun voterInfo(id: Long, address: String): VoterInfoResponse{
+        //var voterInfoResponse
+        //withContext(Dispatchers.IO){
+            //voterInfoResponse = CivicsApi.retrofitService.getVoterInfo(id,address)
+
+        //}
+        return withContext(Dispatchers.IO){ CivicsApi.retrofitService.getVoterInfo(id, address) }
     }
 }
