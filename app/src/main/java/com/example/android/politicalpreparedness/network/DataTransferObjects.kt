@@ -1,17 +1,24 @@
 package com.example.android.politicalpreparedness.network
 
 import com.example.android.politicalpreparedness.database.UpcomingElections
+import com.example.android.politicalpreparedness.network.models.AdministrationBody
 import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.network.models.Election
 import com.squareup.moshi.Json
 import java.util.*
 
-data class NetworkElectionContainer(val kind: String, val elections: List<NetworkElection>)
+data class NetworkElectionContainer(val elections: List<NetworkElection>, val kind: String)
 
 data class NetworkElection(val id: Long, val name: String, val electionDay: String, @Json(name = "ocdDivisionId") val division: String)
 //data class NetworkElection(val id: Long, val name: String, val electionDay: String, @Json(name = "ocdDivisionId") val division: Division)
 
 data class NetworkDivision(val id: String, val country: String, val state: String)
+
+/*data class NetworkVoterInfoContainer(val election: NetworkElection, val state: kotlin.collections.List<NetworkState>)
+
+data class NetworkState(val name: String, val electionAdministrationBody: NetworkAdministrationBody)
+
+data class NetworkAdministrationBody(val votingLocationFinderUrl: String? = null, val ballotInfoUrl: String? = null)*/
 
 fun NetworkDivision.asDomainModal():Division{
     return Division(
@@ -35,7 +42,7 @@ fun kotlin.collections.List<NetworkElection>.asDomainModel(): kotlin.collections
             id = it.id,
             name = it.name,
             electionDay = it.electionDay,
-            division = it.division
+            ocdDivisionId = it.division
             //division = it.division.asDomainModal()
         )
     }

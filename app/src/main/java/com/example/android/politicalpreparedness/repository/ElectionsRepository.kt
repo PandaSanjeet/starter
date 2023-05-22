@@ -42,11 +42,19 @@ class ElectionsRepository(private val database: ElectionDatabase) {
     }
 
     suspend fun voterInfo(id: Long, address: String): VoterInfoResponse{
-        //var voterInfoResponse
-        //withContext(Dispatchers.IO){
-            //voterInfoResponse = CivicsApi.retrofitService.getVoterInfo(id,address)
+        /*var voterInfoResponse = withContext(Dispatchers.IO){ CivicsApi.retrofitService.getVoterInfo(id, address) }
+        val a = 12
+        withContext(Dispatchers.IO){
+           voterInfoResponse = CivicsApi.retrofitService.getVoterInfo(id,address)
 
-        //}
-        return withContext(Dispatchers.IO){ CivicsApi.retrofitService.getVoterInfo(id, address) }
+        }
+        println("AMC "+voterInfoResponse.state + voterInfoResponse.election.name)*/
+            return withContext(Dispatchers.IO) {
+                CivicsApi.retrofitService.getVoterInfo(
+                    id,
+                    address
+                )
+            }
+        //return voterInfoResponse
     }
 }

@@ -44,7 +44,7 @@ class ElectionsFragment: Fragment() {
         //Linked elections to voter info
         viewModel.navigateToSelectedUpcomingElection.observe(viewLifecycleOwner, Observer {
             it?.let {
-                this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(2000))
+                this.findNavController().navigate(ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(it))
                 viewModel.onUpcomingElectionsItemNavigated()
             }
         })

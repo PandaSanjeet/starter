@@ -15,7 +15,7 @@ data class Election(
         val id: Long,
         val name: String,
         val electionDay: String,
-        val division: String
+        val ocdDivisionId: String
         //val division: Division
 ) : Parcelable
 

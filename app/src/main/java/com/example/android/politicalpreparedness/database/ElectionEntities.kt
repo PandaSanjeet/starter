@@ -39,7 +39,7 @@ fun List<UpcomingElections>.asDomainModel(): List<Election>{
             id = it.id,
             name = it.name,
             electionDay = it.electionDay,
-            division = it.division
+            ocdDivisionId = it.division
         )
     }
 }
